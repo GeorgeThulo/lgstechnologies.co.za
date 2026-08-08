@@ -1,7 +1,8 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { useEmailSentTracker } from "./hooks/useEmailSentTracker";
 
 type NavKey = "Services" | "About" | "Contact" | "Terms";
 
@@ -162,6 +163,10 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const [selectedItems, setSelectedItems] = useState<Record<string, string[]>>({});
+  const [fromEmail, setFromEmail] = useState("");
+  const [toEmail, setToEmail] = useState("admin@lgstechnologies.co.za");
+  const [messageText, setMessageText] = useState("");
+  const { hasSentEmail, triggerSendEmail, resetEmailStatus } = useEmailSentTracker();
   const [purchaseSelection, setPurchaseSelection] = useState<{
     category: string;
     items: Array<{ label: string; price: string }>;
@@ -180,12 +185,38 @@ export default function Home() {
 
   const openContactModal = (selection?: { category: string; items: Array<{ label: string; price: string }> }) => {
     setPurchaseSelection(selection ?? null);
+    setToEmail("admin@lgstechnologies.co.za");
+    setFromEmail("");
+    resetEmailStatus();
+
+    if (selection) {
+      const itemsFormatted = selection.items.map((item) => `- ${item.label} (${item.price})`).join("\n");
+      setMessageText(
+        `Hi LGS Technologies,\n\nI would like to purchase the following service(s):\n\nCategory: ${selection.category}\nSelected Services:\n${itemsFormatted}\n\nPlease get back to me with the next steps.`
+      );
+    } else {
+      setMessageText("Hi LGS Technologies,\n\nI would like to inquire about your services.");
+    }
+
     setShowContactModal(true);
   };
 
   const closeContactModal = () => {
     setShowContactModal(false);
     setPurchaseSelection(null);
+    resetEmailStatus();
+  };
+
+  const handleSendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = purchaseSelection
+      ? `Purchase Request: ${purchaseSelection.category}`
+      : "General Inquiry";
+    
+    const body = `From: ${fromEmail}\n\n${messageText}`;
+    const mailtoUrl = `mailto:${encodeURIComponent(toEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    triggerSendEmail(mailtoUrl);
   };
 
   const accent = useMemo(() => {
@@ -459,60 +490,113 @@ export default function Home() {
       </main>
 
       {showContactModal ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 py-6">
-          <div className="w-full max-w-md rounded-[32px] border border-slate-200 bg-white p-8 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
+          <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[28px] border border-slate-200 bg-white p-5 sm:p-8 shadow-2xl">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.35em] text-[#165d82]">Please contact</p>
-                <h2 className="mt-3 text-2xl font-semibold text-slate-950">Contact the administrator</h2>
+                <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.35em] text-[#165d82]">
+                  {purchaseSelection ? "Purchase Order" : "Contact Us"}
+                </p>
+                <h2 className="mt-1 text-xl sm:text-2xl font-semibold text-slate-950">
+                  {purchaseSelection ? "Send Order Inquiry" : "Send a Message"}
+                </h2>
               </div>
               <button
                 type="button"
-                className="rounded-full bg-slate-100 p-2 text-slate-700 transition hover:bg-slate-200"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition hover:bg-slate-200"
                 onClick={closeContactModal}
                 aria-label="Close contact modal"
               >
                 ✕
               </button>
             </div>
-            <div className="mt-6 space-y-4 text-sm text-slate-700">
-              <p>
-                {purchaseSelection
-                  ? "You selected the service below. Contact the administrator to complete your purchase."
-                  : "If you want to sign in or purchase a service, please contact the administrator for assistance."}
-              </p>
-              {purchaseSelection ? (
-                <div className="rounded-3xl bg-[#e2f0fb] p-4">
-                  <p className="text-sm font-semibold text-[#165d82]">Selected services</p>
-                  <p className="mt-1 text-sm text-[#14546c]">{purchaseSelection.category}</p>
-                  <ul className="mt-3 space-y-2">
-                    {purchaseSelection.items.map((item) => (
-                      <li key={item.label} className="flex items-start justify-between gap-3 text-sm">
-                        <span className="font-semibold text-slate-900">{item.label}</span>
-                        <span className="shrink-0 font-semibold text-[#165d82]">{item.price}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+            <form onSubmit={handleSendEmail} className="mt-5 sm:mt-6 space-y-4">
+              <div>
+                <label htmlFor="from-email" className="block text-xs font-semibold uppercase tracking-wider text-[#165d82]">
+                  From (Your Email)
+                </label>
+                <input
+                  id="from-email"
+                  type="email"
+                  required
+                  placeholder="name@example.com"
+                  value={fromEmail}
+                  onChange={(e) => setFromEmail(e.target.value)}
+                  className="mt-1 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-base sm:text-sm text-slate-900 shadow-sm focus:border-[#165d82] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#165d82]/20"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="to-email" className="block text-xs font-semibold uppercase tracking-wider text-[#165d82]">
+                  To
+                </label>
+                <input
+                  id="to-email"
+                  type="email"
+                  required
+                  value={toEmail}
+                  onChange={(e) => setToEmail(e.target.value)}
+                  className="mt-1 w-full rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 text-base sm:text-sm font-semibold text-slate-700 shadow-sm focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message-text" className="block text-xs font-semibold uppercase tracking-wider text-[#165d82]">
+                  Message
+                </label>
+                <textarea
+                  id="message-text"
+                  required
+                  rows={4}
+                  value={messageText}
+                  onChange={(e) => setMessageText(e.target.value)}
+                  className="mt-1 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-base sm:text-sm text-slate-900 shadow-sm focus:border-[#165d82] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#165d82]/20"
+                />
+              </div>
+
+              {hasSentEmail ? (
+                <div className="rounded-2xl bg-emerald-50 p-3.5 text-xs sm:text-sm text-emerald-800 font-medium">
+                  ✓ Email client dispatched! The <strong>Done</strong> button is now unlocked.
                 </div>
               ) : null}
-              <div className="rounded-3xl bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-[#165d82]">Email</p>
-                <p className="mt-2 text-base text-slate-900">admin@lgstechnologies.co.za</p>
+
+              <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2.5 sm:gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={closeContactModal}
+                  className="w-full sm:w-auto min-h-[44px] justify-center flex items-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  Cancel
+                </button>
+                {!hasSentEmail ? (
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto min-h-[44px] justify-center flex items-center rounded-full bg-[#165d82] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#144962]"
+                  >
+                    Send
+                  </button>
+                ) : null}
+                <button
+                  type="button"
+                  disabled={!hasSentEmail}
+                  onClick={closeContactModal}
+                  className={`w-full sm:w-auto min-h-[44px] justify-center flex items-center rounded-full px-6 py-2.5 text-sm font-semibold transition ${
+                    hasSentEmail
+                      ? "bg-emerald-600 text-white shadow-md hover:bg-emerald-700 cursor-pointer"
+                      : "bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300"
+                  }`}
+                >
+                  Done
+                </button>
               </div>
-              <div className="rounded-3xl bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-[#165d82]">Phone</p>
-                <p className="mt-2 text-base text-slate-900">+27 81 436 6424</p>
-              </div>
-            </div>
-            <div className="mt-6 text-right">
-              <button
-                type="button"
-                className="rounded-full bg-[#165d82] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#144962]"
-                onClick={closeContactModal}
-              >
-                Close
-              </button>
-            </div>
+
+              {!hasSentEmail ? (
+                <p className="mt-1 text-center sm:text-right text-xs text-slate-500">
+                  * Click <strong>Send</strong> to launch your email client and enable <strong>Done</strong>.
+                </p>
+              ) : null}
+            </form>
           </div>
         </div>
       ) : null}

@@ -426,21 +426,57 @@ export default function Home() {
           </section>
         ) : activeNav === "Contact" ? (
           <section className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-[30px] border border-slate-200 bg-white p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)]" style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}>
-              <h1 className="text-3xl font-semibold tracking-tight text-[#165d82]">Contact</h1>
-              <p className="mt-6 text-sm leading-8 text-[#14546c]">
+            <div
+              className="rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)]"
+              style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}
+            >
+              <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#165d82]">Contact Us</h1>
+              <p className="mt-4 sm:mt-6 text-sm leading-7 sm:leading-8 text-[#14546c]">
                 Ready to start your digital transformation? Reach out and we’ll help you create a stronger brand, a better website, and a more effective online presence.
               </p>
+              <div className="mt-6 sm:mt-8">
+                <button
+                  type="button"
+                  onClick={() => openContactModal()}
+                  className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#165d82] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#144962] active:scale-95"
+                >
+                  Send Us a Message
+                </button>
+              </div>
             </div>
             <div className="space-y-4">
-              <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
-                <p className="text-sm uppercase tracking-[0.3em] text-[#165d82]">Email</p>
-                <p className="mt-2 text-lg text-[#14546c]">admin@lgstechnologies.co.za</p>
-              </div>
-              <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
-                <p className="text-sm uppercase tracking-[0.3em] text-[#165d82]">Phone</p>
-                <p className="mt-2 text-lg text-[#14546c]">+27 81 436 6424</p>
-              </div>
+              <a
+                href="mailto:admin@lgstechnologies.co.za"
+                className="group flex items-center gap-4 rounded-[24px] border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-sm transition hover:bg-slate-100/80 hover:border-[#165d82]/30 active:scale-[0.99]"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e2f0fb] text-[#165d82]">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-[#165d82]">Email</p>
+                  <p className="mt-1 text-base sm:text-lg font-medium text-[#14546c] truncate group-hover:text-[#165d82] transition-colors">
+                    admin@lgstechnologies.co.za
+                  </p>
+                </div>
+              </a>
+              <a
+                href="tel:+27814366424"
+                className="group flex items-center gap-4 rounded-[24px] border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-sm transition hover:bg-slate-100/80 hover:border-[#165d82]/30 active:scale-[0.99]"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e2f0fb] text-[#165d82]">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 002 2h1.5a1 1 0 01.98.8l1.17 4.68a1 1 0 01-.48 1.06l-1.8 1.08a16 16 0 006.59 6.59l1.08-1.8a1 1 0 011.06-.48l4.68 1.17a1 1 0 01.8.98V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
+                  </svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-[#165d82]">Phone</p>
+                  <p className="mt-1 text-base sm:text-lg font-medium text-[#14546c] group-hover:text-[#165d82] transition-colors">
+                    +27 81 436 6424
+                  </p>
+                </div>
+              </a>
             </div>
           </section>
         ) : activeNav === "Terms" ? (
@@ -557,7 +593,7 @@ export default function Home() {
 
               {hasSentEmail ? (
                 <div className="rounded-2xl bg-emerald-50 p-3.5 text-xs sm:text-sm text-emerald-800 font-medium">
-                  ✓ Email client dispatched! The <strong>Done</strong> button is now unlocked.
+                  ✓ Thank you for calling, we&apos;ll be in touch within 24hrs.
                 </div>
               ) : null}
 
@@ -593,7 +629,7 @@ export default function Home() {
 
               {!hasSentEmail ? (
                 <p className="mt-1 text-center sm:text-right text-xs text-slate-500">
-                  * Click <strong>Send</strong> to launch your email client and enable <strong>Done</strong>.
+                  * Click send to get in touch with us.
                 </p>
               ) : null}
             </form>

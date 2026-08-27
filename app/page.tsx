@@ -55,6 +55,13 @@ const serviceCards: ServiceCard[] = [
     ],
   },
   {
+    title: "SEO",
+    items: [
+      { label: "SEO Setup & Search Console", price: "R 750" },
+      { label: "SEO Optimization", price: "R 1,450" },
+    ],
+  },
+  {
     title: "GOOGLE",
     items: [
       { label: "Google Business Profile", price: "R 550" },

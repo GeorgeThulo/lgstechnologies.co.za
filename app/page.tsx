@@ -158,7 +158,7 @@ const termsSections = [
     title: "12. Governing Law & Contact",
     content: [
       "These Terms are governed by the laws of the Republic of South Africa. Any disputes will be subject to the jurisdiction of South African courts.",
-      "For questions about these Terms or our services, contact us at hello@lgstechnologies.co.za or +27 81 436 6424.",
+      "For questions about these Terms or our services, contact us at hello@lgstechnologies.co.za or +27 81 437 6424.",
       "LGS may update these Terms from time to time. The version published on this website at the time of your purchase applies to your agreement.",
     ],
   },
@@ -469,7 +469,7 @@ export default function Home() {
                 </div>
               </a>
               <a
-                href="tel:+27814366424"
+                href="tel:+27814376424"
                 className="group flex items-center gap-4 rounded-[24px] border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-sm transition hover:bg-slate-100/80 hover:border-[#165d82]/30 active:scale-[0.99]"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e2f0fb] text-[#165d82]">
@@ -480,7 +480,7 @@ export default function Home() {
                 <div className="min-w-0 flex-1">
                   <p className="text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-[#165d82]">Phone</p>
                   <p className="mt-1 text-base sm:text-lg font-medium text-[#14546c] group-hover:text-[#165d82] transition-colors">
-                    +27 81 436 6424
+                    +27 81 437 6424
                   </p>
                 </div>
               </a>

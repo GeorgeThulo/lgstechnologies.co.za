@@ -70,7 +70,7 @@ const jsonLd = {
   "image": "https://lgstechnologies.co.za/lgs-logo.png",
   "description":
     "LGS Technologies provides digital solutions including web development, UI/UX design, data analysis, domain management, branding, and Google Business Profile optimization.",
-  "telephone": "+27814366424",
+  "telephone": "+27814376424",
   "email": "admin@lgstechnologies.co.za",
   "address": {
     "@type": "PostalAddress",

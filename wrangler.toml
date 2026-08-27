@@ -1,3 +1,4 @@
-name = "lgstechnologies-co-za"
-compatibility_date = "2026-08-25"
-pages_build_output_dir = "out"
+name = "lgstechnologiescoza"   # no dashes
+compatibility_date = "2026-08-27"
+main = ".open-next/worker.js"
+assets = { directory = ".open-next/assets" }

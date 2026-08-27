@@ -1,15 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  images: {
+    output: 'standalone',  
+    images: {
     unoptimized: true,
+    domains: ["lgstechnologies.co.za"], // allow your domain
+    formats: ["image/webp", "image/avif"],
   },
 };
-
-// next.config.js
-module.exports = {
-  output: 'standalone',
-}
 
 export default nextConfig;

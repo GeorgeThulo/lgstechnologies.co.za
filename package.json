@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node -e \"require('fs').copyFileSync('public/sitemap.xml', 'out/sitemap.xml'); require('fs').copyFileSync('public/robots.txt', 'out/robots.txt');\"",
     "start": "next start",
     "lint": "eslint"
   },

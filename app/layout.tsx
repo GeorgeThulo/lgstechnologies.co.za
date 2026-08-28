@@ -14,11 +14,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lgstechnologies.co.za"),
-  title: "LGS Technologies | Digital Solutions & Web Services",
+  title: "LGS Technologies South Africa – Software & Hosting Solutions",
   description:
-    "LGS Technologies provides digital solutions including web development, UI/UX design, data analysis, domain management, branding, and Google Business Profile optimization in South Africa.",
+    "Legacy General Solutions (LGS Technologies) provides secure hosting, software development, UI/UX design, and ICT services in South Africa.",
   keywords: [
     "LGS Technologies",
+    "Legacy General Solutions",
+    "Software & Hosting Solutions",
+    "South Africa",
+    "ICT services",
     "web development",
     "UI UX design",
     "data analysis",
@@ -26,7 +30,6 @@ export const metadata: Metadata = {
     "branding",
     "Google Business Profile",
     "Cape Town",
-    "South Africa",
   ],
   alternates: {
     canonical: "/",
@@ -40,9 +43,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://lgstechnologies.co.za",
     siteName: "LGS Technologies",
-    title: "LGS Technologies | Digital Solutions & Web Services",
+    title: "LGS Technologies South Africa – Software & Hosting Solutions",
     description:
-      "Empowering Businesses Through Technology. UI/UX, Data, Domains, Branding & Google Services.",
+      "Legacy General Solutions (LGS Technologies) provides secure hosting, software development, UI/UX design, and ICT services in South Africa.",
     images: [
       {
         url: "/lgs-logo.png",
@@ -54,30 +57,45 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LGS Technologies | Digital Solutions & Web Services",
+    title: "LGS Technologies South Africa – Software & Hosting Solutions",
     description:
-      "Empowering Businesses Through Technology. UI/UX, Data, Domains, Branding & Google Services.",
+      "Legacy General Solutions (LGS Technologies) provides secure hosting, software development, UI/UX design, and ICT services in South Africa.",
     images: ["/lgs-logo.png"],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "LGS Technologies",
-  "url": "https://lgstechnologies.co.za",
-  "logo": "https://lgstechnologies.co.za/lgs-logo.png",
-  "image": "https://lgstechnologies.co.za/lgs-logo.png",
-  "description":
-    "LGS Technologies provides digital solutions including web development, UI/UX design, data analysis, domain management, branding, and Google Business Profile optimization.",
-  "telephone": "+27814376424",
-  "email": "admin@lgstechnologies.co.za",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Cape Town",
-    "addressCountry": "ZA",
-  },
-  "priceRange": "R",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://lgstechnologies.co.za/#organization",
+      "name": "Legacy General Solutions (LGS Technologies)",
+      "alternateName": "LGS Technologies",
+      "url": "https://lgstechnologies.co.za",
+      "logo": "https://lgstechnologies.co.za/lgs-logo.png",
+      "image": "https://lgstechnologies.co.za/lgs-logo.png",
+      "description":
+        "Legacy General Solutions (LGS Technologies) provides secure hosting, software development, UI/UX design, and ICT services in South Africa.",
+      "telephone": "+27814376424",
+      "email": "admin@lgstechnologies.co.za",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Town",
+        "addressCountry": "ZA"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lgstechnologies.co.za/#website",
+      "url": "https://lgstechnologies.co.za",
+      "name": "LGS Technologies South Africa",
+      "description": "Software & Hosting Solutions in South Africa",
+      "publisher": {
+        "@id": "https://lgstechnologies.co.za/#organization"
+      }
+    }
+  ]
 };
 
 export default function RootLayout({

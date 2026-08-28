@@ -333,16 +333,18 @@ export default function Home() {
         {activeNav === "About" ? (
           <section className="grid gap-6 xl:grid-cols-[1.25fr_0.9fr]">
             <div className="rounded-[30px] border border-slate-200 bg-white p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)]" style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}>
-              <h1 className="text-3xl font-semibold tracking-tight text-[#165d82]">About Us</h1>
-              <p className="mt-6 text-xl font-semibold text-[#14546c]">Empowering Businesses Through Technology</p>
+              <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#165d82]">
+                LGS Technologies – Software &amp; Hosting Solutions
+              </h1>
+              <p className="mt-4 sm:mt-6 text-xl font-semibold text-[#14546c]">Empowering South African Businesses Through Technology</p>
               <div className="mt-6 space-y-5 text-sm leading-8 text-[#134a65]">
                 <p>
-                  LGS is a digital solutions company dedicated to helping businesses succeed in today’s digital world. We specialize in creating professional websites, building strong brands, improving online visibility, and providing strategic business and data insights.
+                  Legacy General Solutions (LGS Technologies) is a premier software development, secure hosting, and digital solutions company based in Cape Town, South Africa (lgstechnologies.co.za). We specialize in creating high-performing websites, custom software, UI/UX design, data management, and ICT services.
                 </p>
                 <p>
                   From securing your domain and setting up business email to designing high-performing websites and delivering data-driven strategies, we offer end-to-end digital services that help businesses operate more efficiently, attract more customers, and achieve sustainable growth.
                 </p>
-                <p className="font-semibold text-[#0f4c65]">Build. Brand. Grow. That’s our commitment to every client.</p>
+                <p className="font-semibold text-[#0f4c65]">Build. Brand. Grow. That’s our commitment to every client across South Africa.</p>
               </div>
             </div>
 
@@ -531,6 +533,45 @@ export default function Home() {
           </section>
         )}
       </main>
+
+      <footer className="mt-12 border-t border-slate-200 bg-white py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-base font-bold text-[#165d82]">
+                Legacy General Solutions (LGS Technologies)
+              </p>
+              <p className="mt-1 text-xs text-slate-600">
+                Software &amp; Hosting Solutions • Cape Town, South Africa
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                Official Domain:{" "}
+                <a href="https://lgstechnologies.co.za" className="font-medium text-[#165d82] hover:underline">
+                  lgstechnologies.co.za
+                </a>
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-600">
+              <button type="button" onClick={() => setActiveNav("About")} className="hover:text-[#165d82]">
+                About
+              </button>
+              <button type="button" onClick={() => setActiveNav("Services")} className="hover:text-[#165d82]">
+                Services
+              </button>
+              <button type="button" onClick={() => setActiveNav("Contact")} className="hover:text-[#165d82]">
+                Contact
+              </button>
+              <button type="button" onClick={() => setActiveNav("Terms")} className="hover:text-[#165d82]">
+                Terms &amp; Conditions
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col items-center justify-between gap-2 border-t border-slate-100 pt-4 text-xs text-slate-500 sm:flex-row">
+            <p>© {new Date().getFullYear()} Legacy General Solutions (LGS Technologies). All rights reserved.</p>
+            <p>Email: admin@lgstechnologies.co.za | Phone: +27 81 437 6424</p>
+          </div>
+        </div>
+      </footer>
 
       {showContactModal ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">

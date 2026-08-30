@@ -36,3 +36,14 @@ button {
   background: #7c3aed;
   color: white;
 }
+
+@keyframes bounce-scroll {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(calc(47% - 45%)); } 
+  100% { transform: translateX(0); }
+}
+
+.animate-bounce-scroll {
+  animation: bounce-scroll 6s ease-in-out infinite;
+}
+

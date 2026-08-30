@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
@@ -219,7 +219,7 @@ export default function Home() {
     const subject = purchaseSelection
       ? `Purchase Request: ${purchaseSelection.category}`
       : "General Inquiry";
-    
+
     const body = `From: ${fromEmail}\n\n${messageText}`;
     const mailtoUrl = `mailto:${encodeURIComponent(toEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -246,7 +246,6 @@ export default function Home() {
               <p className="text-[#165d82] font-semibold">Technologies</p>
             </div>
           </div>
-
           <div className="ml-auto flex items-center gap-3">
             <nav className="hidden items-center gap-6 lg:flex">
               {navItems.map((item) => {
@@ -331,35 +330,55 @@ export default function Home() {
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
         {activeNav === "About" ? (
-          <section className="grid gap-6 xl:grid-cols-[1.25fr_0.9fr]">
-            <div className="rounded-[30px] border border-slate-200 bg-white p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)]" style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}>
-              <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#165d82]">
-                LGS Technologies – Software &amp; Hosting Solutions
-              </h1>
-              <p className="mt-4 sm:mt-6 text-xl font-semibold text-[#14546c]">Empowering South African Businesses Through Technology</p>
-              <div className="mt-6 space-y-5 text-sm leading-8 text-[#134a65]">
-                <p>
-                  Legacy General Solutions (LGS Technologies) is a premier software development, secure hosting, and digital solutions company based in Cape Town, South Africa (lgstechnologies.co.za). We specialize in creating high-performing websites, custom software, UI/UX design, data management, and ICT services.
-                </p>
-                <p>
-                  From securing your domain and setting up business email to designing high-performing websites and delivering data-driven strategies, we offer end-to-end digital services that help businesses operate more efficiently, attract more customers, and achieve sustainable growth.
-                </p>
-                <p className="font-semibold text-[#0f4c65]">Build. Brand. Grow. That’s our commitment to every client across South Africa.</p>
-              </div>
+          <section>
+<div className="mt-0 mb-10 mx-auto max-w-[90%] sm:max-w-xl bg-white border border-slate-200 rounded-[30px] shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)] p-4 sm:p-8 flex justify-center items-center text-center"              style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}>
+              <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.35em] text-[#165d82] animate-bounce-scroll break-words">
+                Precise project management, Accurate project context of requirements, exact project timelines
+              </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {serviceCards.slice(0, 4).map((card) => (
-                <div key={card.title} className="rounded-[30px] border border-slate-200 bg-white p-8 shadow-[0_25px_80px_-40px_rgba(15,23,42,0.18)] text-center" style={{ clipPath: "polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%)" }}>
-                  <p className="text-sm uppercase tracking-[0.35em] text-[#165d82]">{card.title}</p>
-                  <div className="mx-auto mt-4 h-2 w-14 rounded-full bg-[#165d82]" />
-                  <div className="mt-6 space-y-3 text-2xl font-semibold tracking-tight text-[#134a65]">
-                    {card.items.map((item) => (
-                      <p key={item.label}>{item.label}</p>
-                    ))}
-                  </div>
+            {/* Two-column grid */}
+            <div className="grid gap-8 xl:grid-cols-[1.25fr_0.9fr]">
+              {/* Left Column: About Content */}
+              <div className="rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.15)]"
+                style={{ clipPath: "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%)" }}>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[#165d82]">
+                  LGS Technologies – Software Hosting Solutions
+                </h1>
+                <p className="mt-3 sm:mt-4 text-lg sm:text-xl font-semibold text-[#14546c]">
+                  Empowering South African Businesses Through Technology
+                </p>
+                <div className="mt-5 sm:mt-6 space-y-4 sm:space-y-5 text-sm sm:text-base leading-7 sm:leading-8 text-[#134a65]">
+                  <p>
+                    Legacy General Solutions (LGS Technologies) is a premier software development, secure hosting, and digital solutions company based in Cape Town, South Africa. We specialize in creating high-performing websites, custom software, UI/UX design, data management, and ICT services.
+                  </p>
+                  <p>
+                    From securing your domain and setting up business email to designing high-performing websites and delivering data-driven strategies, we offer end-to-end digital services that help businesses operate more efficiently, attract more customers, and achieve sustainable growth.
+                  </p>
+                  <p className="font-semibold text-[#0f4c65]">
+                    Build. Brand. Grow. That’s our commitment to every client across South Africa.
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              {/* Right Column: Service Cards */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                {serviceCards.slice(0, 4).map((card) => (
+                  <div key={card.title}
+                    className="rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_25px_80px_-40px_rgba(15,23,42,0.18)] text-center"
+                    style={{ clipPath: "polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%)" }}>
+                    <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.35em] text-[#165d82]">
+                      {card.title}
+                    </p>
+                    <div className="mx-auto mt-3 sm:mt-4 h-2 w-12 sm:w-14 rounded-full bg-[#165d82]" />
+                    <div className="mt-5 sm:mt-6 space-y-2 sm:space-y-3 text-lg sm:text-2xl font-semibold tracking-tight text-[#134a65]">
+                      {card.items.map((item) => (
+                        <p key={item.label}>{item.label}</p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         ) : activeNav === "Services" ? (
@@ -386,11 +405,10 @@ export default function Home() {
                           return (
                             <label
                               key={item.label}
-                              className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition ${
-                                isSelected
-                                  ? "border-[#165d82] bg-[#e2f0fb]"
-                                  : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
-                              }`}
+                              className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition ${isSelected
+                                ? "border-[#165d82] bg-[#e2f0fb]"
+                                : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                                }`}
                             >
                               <input
                                 type="checkbox"
@@ -665,11 +683,10 @@ export default function Home() {
                   type="button"
                   disabled={!hasSentEmail}
                   onClick={closeContactModal}
-                  className={`w-full sm:w-auto min-h-[44px] justify-center flex items-center rounded-full px-6 py-2.5 text-sm font-semibold transition ${
-                    hasSentEmail
-                      ? "bg-emerald-600 text-white shadow-md hover:bg-emerald-700 cursor-pointer"
-                      : "bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300"
-                  }`}
+                  className={`w-full sm:w-auto min-h-[44px] justify-center flex items-center rounded-full px-6 py-2.5 text-sm font-semibold transition ${hasSentEmail
+                    ? "bg-emerald-600 text-white shadow-md hover:bg-emerald-700 cursor-pointer"
+                    : "bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300"
+                    }`}
                 >
                   Done
                 </button>
